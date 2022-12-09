@@ -1,0 +1,10 @@
+Napište program max2.py, který dostane na vstupu dvě celá čísla a vrátí větší z nich. Vyhněte se použití funkce max().
+
+import sys
+
+c1 = int(sys.argv[1])
+c2 = int(sys.argv[2])
+if c1 > c2:
+    print(c1)
+else:
+    print(c2)
