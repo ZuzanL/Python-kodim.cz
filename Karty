@@ -1,0 +1,14 @@
+#Napište program, který vylosuje náhodnou hrací kartu z klasické whistové sady obsahující 52 karet, 
+#rozdělených do čtyř barev (kříže, srdce, piky, káry), s hodnotami 2, 3, 4, 5, 6, 7, 8, 9, 10, J (kluk), Q (dáma), K (král), A (eso).
+
+from secrets import choice
+
+karty = [
+    ['krize', 'srdce', 'piky', 'kary'],
+    ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
+]
+
+# choice(x) -nahodne vyberie jednu value z kazdeho listu
+# choice(karty) - nahodne vyberie jeden cely list z matrixu karty
+karta = [choice(x) for x in karty]
+print(karta)
