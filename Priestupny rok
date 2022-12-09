@@ -1,0 +1,12 @@
+Napište program, který po zadání kalendářního roku vypíše, zda jde o rok přestupný, či nikoliv. 
+Letopočet je přestupný, pokud je dělitelný čtyřmi. Roky, které jsou dělitelné 100 jsou ovšem přestupné pouze tehdy, jsou-li zároveň dělitelné 400.
+
+import sys
+
+rok = [int(sys.argv[1])]
+
+for r in rok:
+    if (r % 4 == 0) or (r % 100 == 0 and r % 400 == 0):
+        print(f'{r} je priestupny')
+    else:
+        print(f'{r} je nepriestupny')
