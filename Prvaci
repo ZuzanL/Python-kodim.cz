@@ -1,0 +1,84 @@
+from unidecode import unidecode
+import json
+
+with open('prvaci.txt', mode='r', encoding='utf-8') as vstup:
+    prvaci = vstup.readlines()
+
+# Přidejte do tabulky sloupec, který bude udávat věk studenta. 
+# Věk studenta zjistíte podle roku narození, což jsou první dvě cifry rodného čísla. 
+
+prvaci = [x.split() for x in prvaci]
+prvaci = prvaci[1:]
+rc = [x[2] for x in prvaci]
+roky = [int(x[:2]) for x in rc]
+vek = [2022 - (x + 1900) for x in roky]
+#print(vek)
+
+index = 0
+for p in prvaci:
+    p.append(vek[index])
+    index += 1
+
+#print(prvaci)
+
+#Přidejte do tabulky sloupec, který bude udávat zda je student muž či žena. 
+#Pohlaví poznáte podle měsíce narození (druhé dvě cifry rodného čísla). 
+#Pokud je člověk ženského pohlaví, přičítá se k první cifře měsíce narození číslo 5.
+
+print(rc)
+pohlavie = [int(x[2:4]) for x in rc]
+print(pohlavie)
+
+
+femaleMale = []
+for p in pohlavie:
+    if p > 49:
+        femaleMale.append('female')
+    else:
+        femaleMale.append('male')
+print(femaleMale)
+
+index = 0
+for p in prvaci:
+    p.append(femaleMale[index])
+    index += 1
+print(prvaci)
+
+# email
+mena = [x[0:2] for x in prvaci]
+mena = [[unidecode(x) for x in zoznam] for zoznam in mena]
+
+spojenie = []
+m1 = []
+m0 = []
+for m in mena:
+    m1 = m[1]
+    m0 = m[0]
+    spojenie.append((m1[0:5] + m0[0:3]).lower() + '@hybrid.eu')
+
+print(spojenie)
+
+index = 0
+for p in prvaci:
+    p.append(spojenie[index])
+    index += 1
+print(prvaci)
+
+#Uložte výslednou tabulku ve formátu JSON do souboru s názvem studenti.json. 
+# K tomu bude potřeba seznam seznamů převést na seznam slovníků. 
+# Každý řádek tabulky tedy bude reprezentován slovníkem, kde klíče jsou názvy sloupečků.
+
+studenti = []
+index = 0
+for p in prvaci:
+    studenti.append({'meno' : p[0]})
+    studenti[index]['priezvisko']= p[1]
+    studenti[index]['rodne cislo']= p[2]
+    studenti[index]['vek']= p[3]
+    studenti[index]['pohlavie']= p[4]
+    studenti[index]['e-mail']= p[5]
+    index += 1
+print(studenti)
+
+with open('studenti.json', mode='w', encoding='utf-8') as vystup:
+    json.dump(studenti, vystup, indent=4, ensure_ascii=False)
