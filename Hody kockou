@@ -1,0 +1,17 @@
+# Napište program, který vytvoří seznam deseti náhodných hodů dvanáctistěnnou kostkou.
+#Nejdříve tento seznam vytiskněte na konzoli pomocí funkce print().
+#Upravte váš program tak, aby náhodné hody kostkou vypsal do souboru s názvem hody.txt 
+# na jeden řádek oddělené čárkou a mezerou.
+#Upravte váš program tak, aby počet hodů dostal jako parametr na příkazové řádce. 
+# Zkuste použitím vašeho programu vyrobit 100, 1000 a 10 000 hodů.
+
+
+from random import randint
+import sys
+
+hody = [str(randint(1, 12)) for x in range(1, (int(sys.argv[1]) +1))] # vytvaranie noveho zoznamu!!! nepiseme x for x
+hody = [x + '\n' for x in hody]
+print(hody)
+
+with open('hody.txt', mode='w', encoding='utf-8') as vystup:
+    hodykockou = vystup.writelines(hody)
