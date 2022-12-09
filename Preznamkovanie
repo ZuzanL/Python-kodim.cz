@@ -1,0 +1,34 @@
+# Univerzita pro celoživotní vzdělávání se rozhodla změnit svůj známkovací systém z číselných známek 1 až 5 na hodnocení písmeny A až F. Bohužel změna se odehrála jaksi uprostřed semestru, takže je potřeba změnit aktuální výkazy o známkách z čísel na písmena. Nechte se vést následujícím postupem.
+#Otevřete si dokument s jedním výkazem známek.
+#Zkopírujte si tuto tabulku do textového souboru.
+#Napište program, který tuto tabulku načte ze souboru a změní 
+# všechny známky tak, že 1 bude A, 2 bude B, 3 bude C, 4 bude D a 5 bude F.
+#Vypište váš výsledek do nějakého souboru tak, aby se z něj dal zase zkopírovat do tabulky Google.
+
+
+with open('znamky.txt', mode='r', encoding='utf-8') as vstup:
+    znamkyCisla = vstup.readlines()
+    znamkyCisla = [x.split() for x in znamkyCisla]
+
+
+# NAHRADENIE KAZDEHO CISLA PISMENOM
+znamkyPismena = [[x.replace('1', 'A').replace('2', 'B').replace('3', 'C')
+.replace('4', 'D').replace('5', 'F') for x in riadok] for riadok in znamkyCisla]
+
+# ZA KAZDE PISMENO IDE TAB
+znamkyPismena = [[x + '\t' for x in riadok] for riadok in znamkyPismena]
+
+
+# VKLADANIE ENTERU(\n) ZA KAZDY SUBLIST
+# .append() - vlozi enter na koniec kazdeho sublistu
+enter = [x.append('\n') for x in znamkyPismena]
+#print(enter)
+
+
+# FLATTENING LIST (ODSTRANENIE SUBLISTOV)
+znamkyPismena = [i for sublist in znamkyPismena for i in sublist]
+print(znamkyPismena)
+
+
+with open('znamkyPismena.txt', mode='w', encoding='utf-8') as vystup:
+    znamkyPrepis = vystup.writelines(znamkyPismena)
