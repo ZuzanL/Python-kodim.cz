@@ -1,0 +1,48 @@
+Napište program, který vylosuje seznam 4 náhodných hracích karet podobně jako v úložce Karty 1 z minulé lekce. Můžeme si představovat, že rozdáváme karty například v pokeru. Zatím pro jednoduchost nebudeme řešit, že se nám může nějaká karta v seznamu opakovat.
+
+Vymyslete, jak budete vylosovanou kartu v seznamu reprezentovat. Vypište pak tento seznam na výstup.
+Dále k tomuto seznamu vypište součet hodnot všech vylosovaných karet. Položme hodnotu karet J, Q a K rovnu deseti a eso rovnu jedné.
+
+
+import random
+
+
+karty = [
+    ['krize', 'srdce', 'piky', 'kary'],
+    ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
+]
+farba = karty[0]
+cislo = karty[1]
+
+# ZOZNAM CISIEL, KTORYCH POCET REPREZENTUJE POCET TAHANYCH KARIET 
+# jednotlive cisla sa dalej budu nahradzat za samotne karty
+pocetKariet = list(range(4))
+pocetKariet = [str(x) for x in pocetKariet]
+print(pocetKariet)
+
+# NAHRADENIE CISIEL NAHODNYMI LOSMI - NAHODNYMI FARBAMI A NAHODNYMI CISLAMI
+nahodneFarby = [x.replace(x, farba[random.randint(0, len(farba) - 1)]) for x in pocetKariet]
+nahodneCisla = [x.replace(x, cislo[random.randint(0, len(cislo) - 1)]) for x in pocetKariet]
+
+# SPAJANIE NAHODNE VYBRATYCH FARIEB A CISIEL
+nahodneKarty = list(zip(nahodneFarby, nahodneCisla)) 
+
+# FORMATOVANIE
+nahodneKarty = [[x + '\t' for x in riadok] for riadok in nahodneKarty] # robenie [] namiesto ()
+enter = [x.append('\n') for x in nahodneKarty] 
+#append nezobrazi v printe enteru - zobrazi to rovno v nahodnychKartach
+
+# FLATTENING LIST
+nKartyflatten = [x for sublist in nahodneKarty for x in sublist]
+
+# SUCET VYLOSOVANYCH KARIET
+sumCisiel = [
+    x.replace('J', '10').replace('Q', '10').replace('K', '10').replace('A', '10') 
+    for x in nahodneCisla
+    ] # nahradzanie pismen za cisla
+sumCisiel = sum([int(x) for x in sumCisiel])
+
+
+with open('karty2.txt', mode='w', encoding='utf-8') as vystup:
+    losy = vystup.writelines(nKartyflatten)
+    hodnotyKariet = vystup.writelines(f'Sucet hodnot vsetkych vylosovanych kariet je {sumCisiel}')
