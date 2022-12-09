@@ -1,0 +1,51 @@
+1. Zkuste napsat program, který na vstupu obdrží seznam čísel a najde mezi nimi nejvyšší číslo. Pozor, bez použití funkce max().
+
+cisla = [1, 4, 6, 3, 1]
+najvacsie_cislo = cisla[0]
+
+for aktualneCislo in cisla:
+    if aktualneCislo > najvacsie_cislo:
+        najvacsie_cislo = aktualneCislo
+print(najvacsie_cislo)
+
+
+2. Zkuste napsat program, který na vstupu obdrží seznam čísel a najde mezi nimi druhé nejvyšší číslo. Opět bez použití funkce max().
+
+zoznam = [1, 2, 9, 8, 10, 13, 4]
+najvacsieCislo = 0
+druheCislo = 0
+
+for cislo in zoznam:
+    if cislo > najvacsieCislo:
+        najvacsieCislo = cislo
+    if cislo > druheCislo and cislo < najvacsieCislo:
+        druheCislo = cislo
+
+print(najvacsieCislo)
+print(druheCislo)
+
+
+3. Napište program, který dostane na příkazové řádce posloupnost čísel. První číslo udává, kolikáté největší číslo chceme ve zbytku zadaných čísel najít. 
+Můžeme tak chtít třeba páté největší číslo z 6, 1, 3, 8, 4, 7, 2
+Pokud je nějaké číslo v seznamu dvakrát, bere se jako dvě různá maxima. Nepoužívejte žádné Python funkce typu sorted nebo max. Napište všechno pěkně od píky.
+
+# N-te maximum v zozname
+import sys
+
+zoznam = [1, 3, 6, 8, 4, 9, 7, 12, 15]
+# i sa meni tolkokrat, kolke maximum zo zoznamu chceme
+i = 0 
+# v premennej maximum sa uklada najvacsie cislo zo zoznamu
+maximum = zoznam[0]
+kolkeMaximum = int(sys.argv[1])
+
+while i < kolkeMaximum:
+    for z in zoznam:
+        if z > maximum:
+            maximum = z
+    if i == (kolkeMaximum - 1):
+        print(maximum)
+        break
+    zoznam.remove(maximum)
+    maximum = 0
+    i += 1
