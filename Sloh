@@ -1,0 +1,13 @@
+# Nechte váš program otevřít soubor a načíst jednotlivé řádky do seznamu.
+# Každý řádek převeďte na seznam slov. Slovem se rozumí vše, co je odděleno mezerou nebo novým řádkem.
+# Vypište na výstup seznam hodnot udávající počty slov na každém řádku.
+# Vypište na výstup celkový počet všech slov v souboru.
+
+with open('praha.txt', encoding='utf-8') as vstup:
+    text = vstup.readlines() # kazde slovo je jeden parameter v liste
+
+text = [slovo.split() for slovo in text] # oddelenie slov zmazanim bielych znakov
+pocetSlov = [len(riadok) for riadok in text] # v kazdom riadku sa spocitaju slova (kazdy riadok je osobitny list)
+slovaCelkom = sum(pocetSlov)
+print(pocetSlov)
+print(slovaCelkom)
