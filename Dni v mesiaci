@@ -1,0 +1,24 @@
+#Nechte váš program vypsat tento seznam do souboru s názvem kalendar.txt, každé číslo na jeden řádek.
+#Upravte váš program tak, aby zároveň s počtem dnů vypisoval i název měsíce. Oddělte v souboru název 
+# měsíce a počet dnů pomocí tabulátoru.
+#Upravte váš program tak, aby jako první řádek výsledného souboru obsahoval nadpisy 
+# pro jednotlivé sloupce, tedy měsíc a počet dní.
+
+# nadpisy tabulky
+m = ['Mesiac' + '\n']
+pd = ['Pocet dni' + '\t']
+
+pocty_dni = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+pocty_dni = [str(x) + '\t' for x in pocty_dni]
+
+mesiace = ['jan', 'feb', 'mar', 'apr', 'maj', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'dec']
+mesiace = [x + '\n' for x in mesiace]
+
+# zlucenie dvoch tabuliek cez list comprh. inak by zlucovalo kazde pismeno s kazdym pismenom zvlast
+# ZIP() - zlucovanie values vo viacerych listoch - prve s prvym, druhe s druhym, atd.
+nadpisy = [x + y for x in pd for y in m] 
+dniMesiace = [x for riadky in zip(pocty_dni, mesiace) for x in riadky]
+tabulka = nadpisy + dniMesiace
+
+with open('kalendar.txt', mode='w', encoding='utf-8') as vystup:
+    kalendar = vystup.writelines(tabulka)
