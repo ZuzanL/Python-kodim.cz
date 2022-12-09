@@ -1,0 +1,13 @@
+Napište program, který o zadaném seznamu celých čísel rozhodne, zda jsou čísla v tomto seznamu vzestupně seřazena.
+
+cisla = [1, 3, 4, 5, 6, 7]
+
+index = 0
+
+for c in cisla:
+    if cisla[index] < cisla[index + 1]:
+        index += 1 
+        if index == len(cisla) - 1:
+            print('Zoznam je vzestupny')
+            exit()
+print('Zoznam nie je vzestupny')
