@@ -1,0 +1,17 @@
+Napište program, kterému uživatel zadá číslo a program odpoví jestli jde o číslo sudé nebo liché, černé nebo červené, nebo je to nula.
+
+import sys
+
+cislo = [int(sys.argv[1])]
+
+for c in cislo:
+    if c in range(1,11) or c in range(19, 29):
+        if c % 2 == 0:
+            print(f'{c} black')
+        else: 
+            print(f'{c} red')
+    elif c in range(11, 19) or c in range(29, 37):
+        if c % 2 == 0:
+            print(f'{c} red')
+        else:
+            print(f'{c} black')
