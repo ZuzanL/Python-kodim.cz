@@ -1,0 +1,44 @@
+# stlpce = kandidati a pocet ziskanych hlasov
+#riadky = jednotlive kraje
+hlasy = [
+  [78774, 43179, 225111, 144799, 242854],
+  [91062, 22451, 17475, 53391, 46450],
+  [179186, 216499, 4493, 156305, 61222],
+  [9619, 53476, 926, 64737, 34566],
+  [66904, 85730, 27271, 12964, 38041],
+  [118755, 1929, 30426, 25178, 31952],
+  [64467, 40993, 81181, 39392, 4335],
+  [11221, 97970, 26179, 98539, 112578],
+  [171064, 7638, 8752, 96666, 39738],
+  [74235, 101680, 18920, 45904, 1922],
+  [39309, 1505, 10531, 30458, 40228],
+  [131584, 1812, 241122, 22267, 99326],
+  [194133, 39985, 200997, 28229, 20780],
+  [66188, 51607, 15977, 177272, 17664]
+]
+
+#Kolik získal každý kandidát hlasů v celé ČR?
+kandidatCelkom = [sum([h[0] for h in hlasy]),
+sum([h[1] for h in hlasy]),
+sum([h[2] for h in hlasy]),
+sum([h[3] for h in hlasy]),
+sum([h[4] for h in hlasy])]
+
+#Který kandidát vyhrál první kolo voleb?
+vyherca = kandidatCelkom.index(max(kandidatCelkom))
+
+#Ve kterých krajích byla nejvyšší a nejnižší volební účast
+volebnaUcast = [sum([(x) for x in kraj]) for kraj in hlasy]
+maxUcast = volebnaUcast.index(max(volebnaUcast))
+minUcast = volebnaUcast.index(min(volebnaUcast))
+
+#Vytvořte tabulku, která ukazuje který kandidát vyhrál v kterém kraji.
+    # 1. max value v jednotlivych krajoch
+    # 2. ukazat index najvacsich hodnot v jednotlivych krajoch
+
+maxKraj = [kraj.index(max(kraj)) for kraj in hlasy]
+print(maxKraj)
+
+# KOLKO % MAL KANDIDAT V KAZDOM KRAJI ZO VSETKYCH HLASOV V CR?
+hlasyCR = sum(kandidatCelkom)
+percenta = [[round((x / hlasyCR) * 100, 2) for x in kraj] for kraj in hlasy]
